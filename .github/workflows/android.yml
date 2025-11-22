@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: test
-        run: ls -l *
+        run: pwd
 
       - name: test2
-        run: pwd
+        run: ls
 
       - name: Checkout Code
         uses: actions/checkout@v4
