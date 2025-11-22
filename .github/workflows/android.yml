@@ -11,10 +11,7 @@ jobs:
 
     steps:
       - name: test
-        run: pwd
-
-      - name: test2
-        run: ls
+        run: ls ..
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -27,14 +24,14 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-        working-directory: /app/kalirc
+        working-directory: /home/runner/work/kalirc
 
       - name: Build Release APK
         run: ./gradlew assembleDebug
-        working-directory: /app/kalirc
+        working-directory: /home/runner/work/kalirc
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: /app/kalirc/app/build/outputs/apk/debug/app-debug.apk
+          path: /home/runner/work/kalirc/app/build/outputs/apk/debug/app-debug.apk
