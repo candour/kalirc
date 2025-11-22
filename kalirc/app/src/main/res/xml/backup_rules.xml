@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- TODO: Remove the following "exclude" directive to enable cloud backups for your app.
+         For more information about Autoo Backup, see https://developer.android.com/guide/topics/data/autobackup
+    -->
+    <exclude domain="database" path="."/>
+    <exclude domain="sharedpref" path="."/>
+    <exclude domain="external" path="."/>
+</full-backup-content>
