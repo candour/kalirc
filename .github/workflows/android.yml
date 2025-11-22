@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: test
+        run: ls -l /
+
+      - name: test2
+        run: find /
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
