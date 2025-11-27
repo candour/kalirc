@@ -29,19 +29,19 @@ class ChatRepository(
 
     fun getMessages(bid: Int) = chatDao.getMessagesForBuffer(bid)
 
-    suspend fun login(email: String, pass: String): Boolean {
+suspend fun login(email: String, pass: String): LoginResult {
         return try {
             val response = api.login(email, pass)
             if (response.success && response.session != null) {
                 userPreferences.saveSession(response.session)
                 userPreferences.saveCredentials(email, pass)
-                true
+            LoginResult.Success
             } else {
-                false
+            LoginResult.Error(response.message ?: "Unknown login error")
             }
         } catch (e: Exception) {
             Log.e("ChatRepository", "Login failed", e)
-            false
+        LoginResult.Error(e.message ?: "An unexpected error occurred")
         }
     }
 

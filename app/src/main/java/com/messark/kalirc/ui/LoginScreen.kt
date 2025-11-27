@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.messark.kalirc.data.ChatRepository
+import com.messark.kalirc.data.LoginResult
 import kotlinx.coroutines.launch
 
 @Composable
@@ -75,13 +76,15 @@ fun LoginScreen(
                     scope.launch {
                         isLoading = true
                         error = null
-                        val success = repository.login(email, password)
-                        isLoading = false
-                        if (success) {
-                            onLoginSuccess()
-                        } else {
-                            error = "Login failed. Check credentials."
+        when (val result = repository.login(email, password)) {
+            is LoginResult.Success -> {
+                onLoginSuccess()
+            }
+            is LoginResult.Error -> {
+                error = result.message
+            }
                         }
+        isLoading = false
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
